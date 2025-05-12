@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dictator Game (Receiver)</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+    .box {
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 30px;
+      max-width: 500px;
+      margin: auto;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      background-color: #007BFF;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>Dictator Game</h1>
+    <p>You were randomly assigned the role of the <strong>receiver</strong>.</p>
+    <p>The dictator was given <strong>10 coins</strong>.</p>
+    <button onclick="revealResult()">Reveal what they gave you</button>
+    
+    <div id="result" class="hidden">
+      <p>The dictator chose to give you <strong id="coins"></strong> coins.</p>
+      <p>Your participant code is: <strong id="code"></strong></p>
+      <p>Please enter this code into the next part of the study.</p>
+      <a href="https://YOUR-QUALTRICS-LINK.com" target="_blank">
+        <button>Continue to Survey</button>
+      </a>
+    </div>
+  </div>
+
+  <script>
+    function revealResult() {
+      const coinOptions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+      const given = coinOptions[Math.floor(Math.random() * coinOptions.length)];
+      document.getElementById("coins").textContent = given;
+
+      // Generate random participant code
+      const code = 'R' + Math.random().toString(36).substring(2, 6).toUpperCase();
+      document.getElementById("code").textContent = code;
+
+      document.getElementById("result").classList.remove("hidden");
+    }
+  </script>
+</body>
+</html>
